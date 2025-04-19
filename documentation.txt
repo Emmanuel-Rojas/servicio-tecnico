@@ -1,0 +1,40 @@
+# Proyecto: Landing Page con Formulario de Envío de Equipos
+
+## Descripción
+Este proyecto es una landing page diseñada para recopilar información de los usuarios a través de un formulario. Los usuarios pueden ingresar datos como su nombre, DNI, dirección, y otros detalles relacionados con el envío de equipos.
+
+## Estructura del Proyecto
+```
+form-page.html       # Página principal con el formulario
+index.html           # Página de inicio o landing principal
+packaging.html       # Página adicional, posiblemente relacionada con servicios
+assets/              # Carpeta de recursos
+    css/             # Estilos del proyecto
+        styles.css   # Archivo principal de estilos
+    img/             # Imágenes utilizadas en el proyecto
+        dibujo.svg
+        facebook.png
+        instagram.png
+        whatsapp.png
+    js/              # Scripts del proyecto
+        script.js    # Archivo principal de JavaScript
+```
+
+## Funcionalidad
+- **Formulario de Envío**: Permite a los usuarios ingresar datos personales y detalles del equipo.
+- **Validaciones**: Validaciones en el cliente para asegurar que los datos ingresados sean correctos (por ejemplo, el DNI debe tener 8 números y el nombre solo debe contener letras).
+- **Notificaciones**: Muestra mensajes de éxito o error mediante popups.
+
+## Instrucciones de Uso
+1. Abre el archivo `form-page.html` en un navegador web.
+2. Completa el formulario con los datos requeridos.
+3. Envía el formulario y verifica los mensajes de confirmación o error.
+
+## Requisitos
+- Navegador web moderno (Google Chrome, Firefox, Edge, etc.).
+- Conexión a internet para enviar los datos a través de Formspree.
+
+## Notas Adicionales
+- Los datos del formulario se envían a través de `https://formspree.io/f/mblgnrnp`.
+- Este proyecto no almacena datos localmente ni en un servidor propio.
+- Asegúrate de que los datos ingresados sean correctos antes de enviarlos.
