@@ -25,95 +25,58 @@ document.addEventListener('DOMContentLoaded', function() {
     // Acá manejamos lo que pasa cuando mandan el formulario
     const form = document.getElementById('service-form');
     if (form) {
+        // Manejar el envío del formulario completamente con JavaScript
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Validaciones para que los datos estén bien
-            const requiredFields = ['nombre', 'dni', 'telefono', 'email', 'direccion', 'ciudad', 'provincia'];
-            let isValid = true;
 
-            // Validación avanzada para cada campo con texto en rojo para errores
-            requiredFields.forEach(field => {
-                const input = document.getElementById(field);
-                const label = input.previousElementSibling; // Obtener el label asociado
-                const value = input.value.trim();
+            // Crear un objeto con los datos del formulario
+            const formData = new FormData(form);
 
-                if (!value) {
-                    isValid = false;
-                    input.style.borderColor = '#ff4d4d'; // Resaltar el campo con borde rojo
-                    if (label) label.style.color = '#ff4d4d'; // Cambiar el color del texto del label a rojo
-                } else {
-                    // Validaciones específicas por campo
-                    if (field === 'nombre') {
-                        const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-                        if (!nameRegex.test(value)) {
-                            isValid = false;
-                            input.style.borderColor = '#ff4d4d';
-                            if (label) label.style.color = '#ff4d4d';
-                        } else {
-                            input.style.borderColor = 'transparent';
-                            if (label) label.style.color = 'white'; // Restaurar el color del texto del label
-                        }
-                    } else if (field === 'dni') {
-                        const dniRegex = /^\d{8}$/; // Solo números y exactamente 8 dígitos
-                        if (!dniRegex.test(value)) {
-                            isValid = false;
-                            input.style.borderColor = '#ff4d4d';
-                            if (label) label.style.color = '#ff4d4d';
-                        } else {
-                            input.style.borderColor = 'transparent';
-                            if (label) label.style.color = 'white';
-                        }
-                    } else if (field === 'email') {
-                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!emailRegex.test(value)) {
-                            isValid = false;
-                            input.style.borderColor = '#ff4d4d';
-                            if (label) label.style.color = '#ff4d4d';
-                        } else {
-                            input.style.borderColor = 'transparent';
-                            if (label) label.style.color = 'white';
-                        }
-                    } else if (field === 'telefono') {
-                        const phoneRegex = /^[0-9]+$/;
-                        if (!phoneRegex.test(value)) {
-                            isValid = false;
-                            input.style.borderColor = '#ff4d4d';
-                            if (label) label.style.color = '#ff4d4d';
-                        } else {
-                            input.style.borderColor = 'transparent';
-                            if (label) label.style.color = 'white';
-                        }
-                    } else {
-                        input.style.borderColor = 'transparent';
-                        if (label) label.style.color = 'white';
-                    }
+            // Enviar los datos a Formspree usando fetch
+            fetch('https://formspree.io/f/mblgnrnp', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
                 }
-            });
-            
-            if (isValid) {
-                // Mostrar el popup de agradecimiento
-                document.body.appendChild(popup);
-                // Agregar clase activa para mostrar el popup
-                setTimeout(() => {
-                    popup.classList.add('active');
-                }, 100);
-                
-                // Resetear formulario
-                form.reset();
-                
-                // Después de 3 segundos, ocultar popup y redirigir
-                setTimeout(() => {
-                    popup.classList.remove('active');
-                    // Pequeño retraso para que termine la animación
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Mostrar el popup de agradecimiento
+                    document.body.appendChild(popup);
                     setTimeout(() => {
-                        window.location.href = 'main-page.html';
-                    }, 300);
-                }, 3000);
-            } else {
-                // Mostrar el popup de error
+                        popup.classList.add('active');
+                    }, 100);
+
+                    // Resetear formulario
+                    form.reset();
+
+                    // Después de 3 segundos, ocultar popup y redirigir
+                    setTimeout(() => {
+                        popup.classList.remove('active');
+                        setTimeout(() => {
+                            window.location.href = 'index.html'; // Redirigir correctamente
+                        }, 300);
+                    }, 3000);
+                } else {
+                    // Mostrar el popup de error si algo falla
+                    document.body.appendChild(errorPopup);
+                    setTimeout(() => {
+                        errorPopup.classList.add('active');
+                    }, 100);
+
+                    // Después de 3 segundos, ocultar popup de error
+                    setTimeout(() => {
+                        errorPopup.classList.remove('active');
+                        setTimeout(() => {
+                            errorPopup.remove();
+                        }, 300);
+                    }, 3000);
+                }
+            })
+            .catch(() => {
+                // Mostrar el popup de error si hay un problema con la solicitud
                 document.body.appendChild(errorPopup);
-                // Agregar clase activa para mostrar el popup
                 setTimeout(() => {
                     errorPopup.classList.add('active');
                 }, 100);
@@ -121,12 +84,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Después de 3 segundos, ocultar popup de error
                 setTimeout(() => {
                     errorPopup.classList.remove('active');
-                    // Pequeño retraso para que termine la animación
                     setTimeout(() => {
                         errorPopup.remove();
                     }, 300);
                 }, 3000);
-            }
+            });
         });
     }
     

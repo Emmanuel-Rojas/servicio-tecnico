@@ -228,6 +228,63 @@ textarea.form-control {
     background-color: #0d9668;
 }
 
+/* Ajustes para el formulario con etiquetas <label> */
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: white;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #2c3548;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #0d9668;
+}
+
 /* Página de instrucciones, para que se vea prolija */
 .instructions-container {
     max-width: 800px;

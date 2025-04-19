@@ -24,103 +24,62 @@
             <p class="form-description">Complete el formulario para coordinar el envío de tu equipo. Una vez recibido, te enviaremos las instrucciones a seguir.</p>
             
             <!-- Este es el formulario para que la gente mande info sobre su equipo -->
-            <form id="service-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Nombre y apellido, obvio -->
-                        <label for="nombre">Nombre y Apellido</label>
-                        <input type="text" id="nombre" class="form-control" placeholder="Nombre y Apellido" aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <!-- DNI, porque lo necesitamos para identificar -->
-                        <label for="dni">DNI</label>
-                        <input type="text" id="dni" class="form-control" placeholder="DNI" aria-required="true">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Teléfono, para contactarlos rápido -->
-                        <label for="telefono">Teléfono</label>
-                        <input type="tel" id="telefono" class="form-control" placeholder="Teléfono" aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <!-- Email, para enviarles cosas importantes -->
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" placeholder="Email" aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <!-- Código postal, por si hace falta -->
-                        <label for="codigo-postal">Código Postal</label>
-                        <input type="text" id="codigo-postal" class="form-control" placeholder="Código Postal">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Dirección, para saber dónde están -->
-                        <label for="direccion">Dirección</label>
-                        <input type="text" id="direccion" class="form-control" placeholder="Dirección" aria-required="true">
-                    </div>
-                    <div class="form-group">
-                        <!-- Ciudad, porque es importante -->
-                        <label for="ciudad">Ciudad</label>
-                        <input type="text" id="ciudad" class="form-control" placeholder="Ciudad" aria-required="true">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Provincia, lo mismo que la ciudad -->
-                        <label for="provincia">Provincia</label>
-                        <input type="text" id="provincia" class="form-control" placeholder="Provincia" aria-required="true">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Qué equipo es, para saber qué van a mandar -->
-                        <label for="equipo">Equipo</label>
-                        <select id="equipo" class="form-control" aria-required="true">
-                            <option value="" selected disabled>Laptop</option>
-                            <option value="laptop">Laptop</option>
-                            <option value="console">Consola</option>
-                            <option value="tablet">Placa de Video</option>
-                            <option value="other">Otro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <!-- Marca del equipo, por si hay que buscar algo específico -->
-                        <label for="marca">Marca</label>
-                        <input type="text" id="marca" class="form-control" placeholder="Marca">
-                    </div>
-                    <div class="form-group">
-                        <!-- Modelo del equipo, más detalles nunca sobran -->
-                        <label for="modelo">Modelo</label>
-                        <input type="text" id="modelo" class="form-control" placeholder="Modelo">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Qué le pasa al equipo, para tener una idea -->
-                        <label for="falla">Falla principal</label>
-                        <input type="text" id="falla" class="form-control" placeholder="Falla principal" aria-required="true">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <!-- Comentarios extra, por si quieren decir algo más -->
-                        <label for="comentarios">Comentarios adicionales</label>
-                        <textarea id="comentarios" class="form-control" placeholder="Comentarios adicionales"></textarea>
-                    </div>
-                </div>
-                
-                <button type="submit" class="form-submit">
-                    <i class="fas fa-paper-plane"></i>
-                    Enviar
-                </button>
+            <form id="service-form" method="POST">
+                <label>
+                    Nombre y Apellido:
+                    <input type="text" name="nombre" placeholder="Nombre y Apellido" required>
+                </label>
+                <label>
+                    DNI:
+                    <input type="text" name="dni" placeholder="DNI" required>
+                </label>
+                <label>
+                    Teléfono:
+                    <input type="tel" name="telefono" placeholder="Teléfono" required>
+                </label>
+                <label>
+                    Email:
+                    <input type="email" name="email" placeholder="Email" required>
+                </label>
+                <label>
+                    Dirección:
+                    <input type="text" name="direccion" placeholder="Dirección" required>
+                </label>
+                <label>
+                    Ciudad:
+                    <input type="text" name="ciudad" placeholder="Ciudad" required>
+                </label>
+                <label>
+                    Provincia:
+                    <input type="text" name="provincia" placeholder="Provincia" required>
+                </label>
+                <label>
+                    Equipo:
+                    <select name="equipo" required>
+                        <option value="" disabled selected>Seleccione un equipo</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="console">Consola</option>
+                        <option value="video">Placa de Video</option>
+                        <option value="other">Otro</option>
+                    </select>
+                </label>
+                <label>
+                    Marca:
+                    <input type="text" name="marca" placeholder="Marca">
+                </label>
+                <label>
+                    Modelo:
+                    <input type="text" name="modelo" placeholder="Modelo">
+                </label>
+                <label>
+                    Falla principal:
+                    <input type="text" name="falla" placeholder="Falla principal" required>
+                </label>
+                <label>
+                    Comentarios adicionales:
+                    <textarea name="comentarios" placeholder="Comentarios adicionales"></textarea>
+                </label>
+                <button type="submit">Enviar</button>
             </form>
         </div>
         
