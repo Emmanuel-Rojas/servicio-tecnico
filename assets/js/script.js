@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     errorPopup.innerHTML = `
         <div class="popup-content">
             <h2>Error</h2>
-            <p>Por favor completa todos los campos.</p>
+            <p>Por favor completa correctamente todos los campos.</p>
         </div>
     `;
 
@@ -29,15 +29,77 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Asegurarse de que el popup no se duplique
-            if (!document.body.contains(popup)) {
-                document.body.appendChild(popup);
+            // Validaciones personalizadas
+            const nombre = form.querySelector('input[name="nombre"]');
+            const dni = form.querySelector('input[name="dni"]');
+            const requiredFields = form.querySelectorAll('[required]');
+
+            // Limpiar errores previos
+            requiredFields.forEach(field => {
+                field.classList.remove('error-field');
+                const label = field.closest('label');
+                if (label) {
+                    label.classList.remove('error-label');
+                }
+            });
+
+            // Verificar campos requeridos
+            let allFieldsValid = true;
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    allFieldsValid = false;
+                    field.classList.add('error-field');
+                    const label = field.closest('label');
+                    if (label) {
+                        label.classList.add('error-label');
+                    }
+                }
+            });
+
+            // Validar que el nombre solo contenga letras
+            const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+            if (!nombreRegex.test(nombre.value)) {
+                allFieldsValid = false;
+                nombre.classList.add('error-field');
+                const label = nombre.closest('label');
+                if (label) {
+                    label.classList.add('error-label');
+                }
             }
 
-            // Crear un objeto con los datos del formulario
+            // Validar que el DNI tenga exactamente 8 números
+            const dniRegex = /^\d{8}$/;
+            if (!dniRegex.test(dni.value)) {
+                allFieldsValid = false;
+                dni.classList.add('error-field');
+                const label = dni.closest('label');
+                if (label) {
+                    label.classList.add('error-label');
+                }
+            }
+
+            if (!allFieldsValid) {
+                // Mostrar el popup de error si hay campos inválidos
+                if (!document.body.contains(errorPopup)) {
+                    document.body.appendChild(errorPopup);
+                }
+                setTimeout(() => {
+                    errorPopup.classList.add('active');
+                }, 100);
+
+                // Después de 3 segundos, ocultar popup de error
+                setTimeout(() => {
+                    errorPopup.classList.remove('active');
+                    setTimeout(() => {
+                        errorPopup.remove();
+                    }, 300);
+                }, 3000);
+                return;
+            }
+
+            // Si todo está bien, proceder con el envío
             const formData = new FormData(form);
 
-            // Enviar los datos a Formspree usando fetch
             fetch('https://formspree.io/f/mblgnrnp', {
                 method: 'POST',
                 body: formData,
@@ -48,6 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => {
                 if (response.ok) {
                     // Mostrar el popup de agradecimiento
+                    if (!document.body.contains(popup)) {
+                        document.body.appendChild(popup);
+                    }
                     setTimeout(() => {
                         popup.classList.add('active');
                     }, 100);
@@ -59,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     setTimeout(() => {
                         popup.classList.remove('active');
                         setTimeout(() => {
-                            window.location.href = 'index.html'; // Redirigir correctamente
+                            window.location.href = 'index.html';
                         }, 300);
                     }, 3000);
                 } else {

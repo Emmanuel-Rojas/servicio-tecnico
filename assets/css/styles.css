@@ -471,6 +471,22 @@ footer.social a img:hover {
     opacity: 0.8; /* Hacer el color menos intenso */
 }
 
+/* Estilos para resaltar los campos con errores */
+.error-field {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+label.error-label {
+    color: red;
+}
+
 /* Estilos para que se vea bien en celulares */
 @media (max-width: 768px) {
     .buttons-container, .services-container, .devices-container {
