@@ -481,6 +481,65 @@ footer.social a img:hover {
     .form-row {
         flex-direction: column;
     }
+
+    /* Ajustar el tamaño del logo en el header */
+    .logo-container img.logo-img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    /* Centrar y ajustar el popup para que se vea en pantallas pequeñas */
+    .thank-you-popup, .error-popup {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .popup-content {
+        max-width: 90%;
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    /* Ajustar el formulario para que sea más legible */
+    .form-container {
+        padding: 20px;
+    }
+
+    .form-title h2 {
+        font-size: 20px;
+    }
+
+    .form-description {
+        font-size: 12px;
+    }
+
+    form label {
+        font-size: 12px;
+    }
+
+    form input, form select, form textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    form button {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    /* Ajustar el diseño general para evitar columnas largas */
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
 
 /* Añadir estas reglas a tu CSS existente */
