@@ -30,6 +30,10 @@ header {
 
 /* Espacio entre el logo y el texto de abajo */
 .logo-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Centra la imagen horizontalmente */
     margin-bottom: 20px; /* Añade espacio debajo del logo */
 }
 
@@ -484,8 +488,8 @@ footer.social a img:hover {
 
     /* Ajustar el tamaño del logo en el header */
     .logo-container img.logo-img {
-        width: 100%;
-        max-width: 300px;
+        width: 80%; /* Reducir aún más el tamaño del logo */
+        max-width: 200px; /* Limitar el tamaño máximo en dispositivos móviles */
         height: auto;
     }
 

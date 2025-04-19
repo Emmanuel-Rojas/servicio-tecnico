@@ -29,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            // Asegurarse de que el popup no se duplique
+            if (!document.body.contains(popup)) {
+                document.body.appendChild(popup);
+            }
+
             // Crear un objeto con los datos del formulario
             const formData = new FormData(form);
 
@@ -43,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => {
                 if (response.ok) {
                     // Mostrar el popup de agradecimiento
-                    document.body.appendChild(popup);
                     setTimeout(() => {
                         popup.classList.add('active');
                     }, 100);
@@ -60,7 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     }, 3000);
                 } else {
                     // Mostrar el popup de error si algo falla
-                    document.body.appendChild(errorPopup);
+                    if (!document.body.contains(errorPopup)) {
+                        document.body.appendChild(errorPopup);
+                    }
                     setTimeout(() => {
                         errorPopup.classList.add('active');
                     }, 100);
@@ -76,7 +82,9 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(() => {
                 // Mostrar el popup de error si hay un problema con la solicitud
-                document.body.appendChild(errorPopup);
+                if (!document.body.contains(errorPopup)) {
+                    document.body.appendChild(errorPopup);
+                }
                 setTimeout(() => {
                     errorPopup.classList.add('active');
                 }, 100);
