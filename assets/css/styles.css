@@ -20,6 +20,11 @@ header {
 }
 
 /* El logo, que se vea bien grande */
+.logo-container {
+    display: inline-block; /* Asegura que el contenedor se ajuste al tamaño del logo */
+    position: relative; /* Necesario para posicionar elementos dentro */
+}
+
 .logo-container img.logo-img {
     width: 900px;
     max-width: 90%;
@@ -28,20 +33,48 @@ header {
     margin: 0 auto 10px;
 }
 
-/* Espacio entre el logo y el texto de abajo */
 .logo-container img {
-    max-width: 100%;
-    height: auto;
     display: block;
+    width: 100%; /* Asegura que el logo ocupe todo el ancho del contenedor */
+    height: auto;
     margin: 0 auto; /* Centra la imagen horizontalmente */
     margin-bottom: 20px; /* Añade espacio debajo del logo */
 }
 
-/* El texto que va debajo del logo */
+/* Espacio entre el logo y el texto de abajo */
 .logo-container p {
     font-size: 25px;
     opacity: 0.9;
     margin: 0;
+}
+
+/* Linea de Neon */
+.logo-container .neon-line {
+    position: absolute;
+    bottom: -10px; /* Ajusta la posición debajo del logo */
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 90%; /* Ajusta el ancho relativo al logo */
+    height: 4px;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        #4a90e2 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%; /* Permite el efecto de movimiento */
+    animation: neon-glow 2s infinite linear; /* Animación para iluminar de lado a lado */
+    border-radius: 10px;
+}
+
+@keyframes neon-glow {
+    0% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
 }
 
 /* Botones principales, para que sean llamativos */
@@ -342,19 +375,26 @@ form button[type="submit"]:hover {
 /* Iconos de redes sociales, para que sean fáciles de encontrar */
 footer.social {
     display: flex;
-    justify-content: center;
-    gap: 2rem; 
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     margin-top: 2rem;
 }
 
-footer.social a img {
-    width: 64px;
-    height: 64px;
-    transition: transform 0.3s ease;
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
 }
 
-footer.social a img:hover {
-    transform: scale(1.1);
+.creator-info {
+    text-align: center;
+    margin-top: 0;
+}
+
+.creator-info p {
+    font-size: x-small;
+    color: #4a90e2;
 }
 
 /* Popup de agradecimiento, cuando todo sale bien */
@@ -508,6 +548,7 @@ label.error-label {
         max-width: 200px; /* Limitar el tamaño máximo en dispositivos móviles */
         height: auto;
     }
+
 
     /* Centrar y ajustar el popup para que se vea en pantallas pequeñas */
     .thank-you-popup, .error-popup {
